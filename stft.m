@@ -1,7 +1,8 @@
 clear; close all; clc;
 
 % wavファイル読み込み
-[audioSig,fs] = audioread("sig1.wav"); 
+inputFileName = "voice.wav";
+[audioSig,fs] = audioread(inputFileName); 
 
 % 各種パラメータを定義
 signalLength = length(audioSig); % 信号長
@@ -20,9 +21,11 @@ for i = 1 : numFlames
     S(:,i) = paddedSig(startIndex : endIndex);    
 end
 
-% STFT
+% 窓かけ
 win = hann(windowLength);
 winS = win .* S; % 暗黙的拡張で計算
+
+% fft
 spect = fft(winS);
 ampSpect = abs(spect);
 powerSpect = 20 * log10(ampSpect); % 利得[db]に変換
