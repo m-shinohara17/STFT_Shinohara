@@ -24,8 +24,8 @@ switch windowType
         win = hamming(windowLength);
     case "blackman" % ブラックマン窓
         win = blackman(windowLength);
-    otherwise 
-        error("窓関数の文字列を見直してください！");
+    otherwise % 
+        error("窓関数が無効です!");
 end
 
 winA = win .* A; % 暗黙的拡張で計算
