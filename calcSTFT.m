@@ -1,7 +1,21 @@
-%関数の定義
 function S = calcSTFT(audioSig, fs, windowLength, shiftLength, windowType, drawSpect)
-signalLength = length(audioSig);
+% STFTの一連の動作を行う関数
+%
+% [syntax]
+% S = calcSTFT(audioSig, fs, windowLength, shiftLength, windowType, drawSpect)
+%
+% [inputs]
+% audiosig, 音声信号の振幅 (信号長×1)
+% fs, サンプリング周波数 (スカラー)
+% windowLength, 窓長 (スカラー)
+% shiftLength, シフト長 (スカラー)
+% windowType, 窓関数の種類 (string)
+% drawSpect, スペクトログラムの表示を切り替え (true or false, trueで表示，falseで非表示)
+% [output]
+% S, 対数振幅スペクトル (信号長×1)
 
+
+signalLength = length(audioSig);
 % 零詰め
 paddedSig = [zeros(windowLength / 2, 1) ; audioSig ; zeros(windowLength - 1, 1)];
 numFlames = ceil((windowLength / 2 + signalLength) / shiftLength); % 分割数
